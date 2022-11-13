@@ -4,7 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-
+    
     static associate({ Comment }) {
       User.hasMany(Comment, { as: 'author', foreignKey: 'author_id' })
     }
@@ -20,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
+    role: {
+      type: DataTypes.ENUM,
+      values: [
+        'reviewers',
+        'admin'
+      ]
+    },
     passwordDigest: DataTypes.STRING,
   }, {
     sequelize,

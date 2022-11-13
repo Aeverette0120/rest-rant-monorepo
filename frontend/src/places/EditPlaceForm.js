@@ -30,7 +30,8 @@ function EditPlaceForm() {
 		await fetch(`http://localhost:5000/places/${place.placeId}`, {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authentication': `Bearer ${localStorage.getItem('token')}`
 			},
 			body: JSON.stringify(place)
 		})
