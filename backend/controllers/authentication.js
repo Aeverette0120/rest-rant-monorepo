@@ -24,23 +24,24 @@ router.post("/", async (req, res) => {
   console.log(user);
 });
 router.get("/profile", async (req, res) => {
-  try {
-    const [authenticationMethod, token] = req.headers.authentication.split(" ");
+  res.json(req.currentUser)
+  // try {
+  //   const [authenticationMethod, token] = req.headers.authentication.split(" ");
 
-    if (authenticationMethod == "Bearer") {
-      const result = await jwt.decode(process.env.JWT_SECRET, token);
-      const { id } = result.value;
+  //   if (authenticationMethod == "Bearer") {
+  //     const result = await jwt.decode(process.env.JWT_SECRET, token);
+  //     const { id } = result.value;
 
-      let user = await User.findOne({
-        where: {
-          userId: id,
-        },
-      });
-      res.json(user);
-    }
-  } catch {
-    res.json(null);
-  }
+  //     let user = await User.findOne({
+  //       where: {
+  //         userId: id,
+  //       },
+  //     });
+  //     res.json(user);
+  //   }
+  // } catch {
+  //   res.json(null);
+  // }
 });
 
 module.exports = router;
